@@ -17,6 +17,7 @@ body{margin:0;font-family:var(--font-sans);background:var(--bg);color:var(--text
 .topbar-inner{max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
 .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:pulse 2.8s infinite}
+.brand-logo{height:28px;width:auto;vertical-align:middle;margin-inline-start:4px}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-soft)}50%{box-shadow:0 0 0 7px transparent}}
 .topbar-actions{display:flex;gap:6px}
 .btn{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);border-radius:var(--radius-sm);cursor:pointer;padding:0}
@@ -149,7 +150,7 @@ details.collapsible[open]>summary::after{transform:rotate(-90deg)}
 <header class="topbar"><div class="topbar-inner">
 <div class="brand">
 <button class="btn mobile-menu" onclick="openSidebar()" aria-label="القائمة"><svg class="icon" viewBox="0 0 24 24"><use href="#i-menu"/></svg></button>
-<span class="brand-dot"></span><span>موسوعة هيرميس</span>
+<span class="brand-dot"></span><span>موسوعة هيرميس</span><img src="logo.png" alt="Hermes" class="brand-logo">
 </div>
 <div class="topbar-actions">
 <button class="btn" onclick="toggleTheme()" aria-label="المظهر"><svg class="icon" viewBox="0 0 24 24"><use id="ti" href="#i-moon"/></svg></button>
