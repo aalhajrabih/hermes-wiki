@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>موسوعة هيرميس</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF7;--surface:#FFF;--surface-2:#F5F5F0;--text:#1A1A1A;--text-muted:#4A4A45;--text-subtle:#6B6B66;--accent:#D97757;--accent-soft:#FBEEE6;--accent-border:#F0D5C4;--accent-strong:#A85533;--border:#E5E4DC;--border-strong:#CDCDC4;--code-bg:#F5F2EC;--code-text:#2A2A2A;--info:#2563EB;--info-soft:#EFF6FF;--info-border:#BFDBFE;--warn:#B45309;--warn-soft:#FFFBEB;--warn-border:#FDE68A;--danger:#B91C1C;--danger-soft:#FEF2F2;--danger-border:#FECACA;--success:#047857;--success-soft:#ECFDF5;--success-border:#A7F3D0;--radius:12px;--radius-sm:8px;--shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 8px 24px rgba(0,0,0,.1);--font-sans:'Noto Sans Arabic','Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+[data-theme="dark"]{--bg:#1A1714;--surface:#221E1A;--surface-2:#2A2520;--text:#F5F0E8;--text-muted:#C8C0B6;--text-subtle:#9A938A;--accent:#E89572;--accent-soft:#3A2A22;--accent-border:#5A3D2E;--accent-strong:#F5B493;--border:#2E2924;--border-strong:#463F38;--code-bg:#1E1B17;--code-text:#E8E2D8;--info:#93C5FD;--info-soft:#1E2A3D;--info-border:#2A4365;--warn:#FBBF24;--warn-soft:#332817;--warn-border:#5C4520;--danger:#FCA5A5;--danger-soft:#3A1F1F;--danger-border:#5C2A2A;--success:#6EE7B7;--success-soft:#1A3329;--success-border:#1F5C45}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent-soft);color:var(--accent-strong)}
+.icon{display:inline-block;flex-shrink:0;vertical-align:middle;stroke:currentColor;fill:none}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(250,250,247,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+[data-theme="dark"] .topbar{background:rgba(26,23,20,.85)}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);animation:pulse 2.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-soft)}50%{box-shadow:0 0 0 7px transparent}}
+.topbar-actions{display:flex;gap:6px}
+.btn{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);border-radius:var(--radius-sm);cursor:pointer;padding:0}
+.btn .icon{width:18px;height:18px;stroke-width:2}
+.layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:48px;padding:32px 24px 96px}
+.content{min-width:0}
+.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh-100px);overflow-y:auto;padding-inline-end:8px}
+.sidebar-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);margin:0 0 4px;padding:0 14px}
+.sidebar-section{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-subtle);padding:16px 14px 6px;margin:0}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px}
+.sidebar-nav a{display:flex;align-items:center;min-height:36px;padding:8px 14px;color:var(--text-muted);text-decoration:none;font-size:13.5px;border-inline-start:2px solid transparent;border-radius:0 var(--radius-sm) var(--radius-sm) 0;transition:color .15s,background .15s,border-color .15s;cursor:pointer}
+.sidebar-nav a.active{color:var(--accent);border-inline-start-color:var(--accent);background:var(--accent-soft);font-weight:500}
+.page{display:none}
+.page.active{display:block}
+.doc-header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.doc-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent-border);border-radius:999px;font-size:12px;font-weight:500;margin-bottom:16px}
+.doc-title{font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.15;margin:0 0 12px}
+.doc-subtitle{font-size:clamp(15px,1.5vw,18px);color:var(--text-muted);margin:0 0 20px;max-width:75ch}
+.doc-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--text-subtle)}
+.doc-meta .icon{width:14px;height:14px;stroke-width:2}
+.content h2{font-size:26px;font-weight:600;margin:56px 0 16px;padding-top:8px;scroll-margin-top:80px}
+.content h3{font-size:19px;font-weight:600;margin:36px 0 12px;scroll-margin-top:80px}
+.content h1{font-size:32px;font-weight:700;margin:40px 0 16px;scroll-margin-top:80px}
+.content p,.content li,.content blockquote{max-width:75ch;overflow-wrap:anywhere}
+.content p{margin:0 0 16px}
+.content a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-border)}
+.content ul,.content ol{padding-inline-start:24px;margin:0 0 16px}
+.content li{margin:4px 0}
+.content strong{color:var(--text);font-weight:600}
+.content hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.content code{font-family:var(--font-mono);background:var(--code-bg);padding:2px 6px;border-radius:4px;font-size:.88em;color:var(--code-text);border:1px solid var(--border);direction:ltr;unicode-bidi:embed;max-width:100%;overflow-wrap:anywhere;word-break:break-all}
+.content pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:16px 0;direction:ltr;text-align:left;max-width:100%}
+.content pre code{background:none;padding:0;border:none;color:var(--code-text);font-size:inherit}
+.callout{display:flex;gap:14px;padding:14px 18px;border-radius:var(--radius);border:1px solid;margin:20px 0;font-size:14.5px;line-height:1.6;max-width:75ch}
+.callout-icon{width:20px;height:20px;margin-top:2px;flex-shrink:0}
+.callout-body{flex:1}.callout-title{font-weight:600;margin:0 0 4px;font-size:14px}.callout-body p:last-child{margin-bottom:0}
+.callout-info{background:var(--info-soft);border-color:var(--info-border)}.callout-info .callout-title,.callout-info .callout-icon{color:var(--info)}
+.callout-warn{background:var(--warn-soft);border-color:var(--warn-border)}.callout-warn .callout-title,.callout-warn .callout-icon{color:var(--warn)}
+.callout-danger{background:var(--danger-soft);border-color:var(--danger-border)}.callout-danger .callout-title,.callout-danger .callout-icon{color:var(--danger)}
+.callout-success{background:var(--success-soft);border-color:var(--success-border)}.callout-success .callout-title,.callout-success .callout-icon{color:var(--success)}
+.highlight{background:linear-gradient(135deg,var(--accent-soft),var(--surface-2));border-inline-start:4px solid var(--accent);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;margin:24px 0;font-size:16px;max-width:75ch}
+.highlight-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-strong);margin-bottom:6px}
+details.collapsible{border:1px solid var(--border);border-radius:var(--radius);margin:16px 0;background:var(--surface)}
+details.collapsible>summary{cursor:pointer;padding:14px 18px;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.collapsible>summary::-webkit-details-marker{display:none}
+details.collapsible>summary::after{content:"‹";font-size:20px;font-weight:700;color:var(--accent);transition:transform .18s}
+details.collapsible[open]>summary::after{transform:rotate(-90deg)}
+.collapsible-body{padding:4px 18px 18px;border-top:1px solid var(--border)}
+.table-wrap{overflow-x:auto;margin:20px 0;border-radius:var(--radius);border:1px solid var(--border)}
+.content table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}
+.content th{background:var(--surface-2);font-weight:600;text-align:start;padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.content td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-muted)}
+.content tr:last-child td{border-bottom:none}
+.content blockquote{margin:20px 0;padding:4px 20px;border-inline-start:3px solid var(--accent-border);color:var(--text-muted);font-style:italic}
+.copy-btn{position:absolute;top:8px;right:8px;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;color:var(--text-subtle);opacity:0;transition:opacity .15s;padding:0;z-index:1}
+.copy-btn .icon{width:14px;height:14px;stroke-width:2}
+.copy-btn.copied{color:var(--success);border-color:var(--success-border);opacity:1}
+.content pre{position:relative}
+.content pre:hover .copy-btn,.copy-btn:focus-visible{opacity:1}
+.doc-footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--text-subtle);display:flex;justify-content:space-between;flex-wrap:wrap}
+.mobile-menu{display:none!important}
+@media(hover:hover){.btn:hover{color:var(--accent);border-color:var(--accent-border);background:var(--accent-soft)}.sidebar-nav a:hover{color:var(--accent);background:var(--accent-soft)}}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;gap:12px;padding:8px 8px 60px}
+  .topbar-inner{padding:8px 10px}
+  .sidebar{display:none;position:fixed;top:0;right:0;width:min(280px,85vw);height:100dvh;height:100svh;background:var(--surface);z-index:300;padding:16px;box-shadow:var(--shadow-lg);overflow-y:auto;overscroll-behavior:contain}
+  .sidebar.open{display:block}
+  .mobile-menu{display:inline-flex!important}
+  .mobile-close{display:inline-flex!important;width:36px;height:36px;align-items:center;justify-content:center;background:transparent;border:1px solid transparent;border-radius:var(--radius-sm);color:var(--text-muted);cursor:pointer;padding:0;margin-bottom:12px}
+  .backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:250}
+  .backdrop.open{display:block}
+  body{font-size:15px;overflow-x:hidden}
+  .doc-header{margin-bottom:20px;padding-bottom:14px}
+  .doc-title{font-size:22px;word-break:break-word}
+  .doc-subtitle{font-size:13px;word-break:break-word}
+  .doc-eyebrow{font-size:11px;padding:3px 8px;margin-bottom:10px}
+  .doc-meta{font-size:11px;gap:8px;flex-wrap:wrap}
+  .content h1{font-size:22px;margin:28px 0 10px;word-break:break-word}
+  .content h2{font-size:18px;margin:28px 0 10px;padding-top:4px;word-break:break-word}
+  .content h3{font-size:15px;margin:20px 0 8px;word-break:break-word}
+  .content p,.content li,.content blockquote{max-width:100%;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
+  .content p{margin-bottom:12px}
+  .content ul,.content ol{padding-inline-start:20px;margin-bottom:12px}
+  .content pre{font-size:11px;padding:10px 12px;margin:10px 0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-sm)}
+  .content pre code{font-size:11px}
+  .content code{font-size:.8em;word-break:break-all;max-width:100%;display:inline-block;overflow-wrap:anywhere}
+  .table-wrap{margin:12px 0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-sm)}
+  .content table{font-size:11px;min-width:100%}
+  .content th,.content td{padding:6px 8px;white-space:nowrap}
+  .content th{font-size:11px}
+  .content td{font-size:11px}
+  .callout{padding:10px 12px;font-size:13px;margin:12px 0;flex-direction:column;gap:8px}
+  .callout-icon{width:18px;height:18px}
+  .callout-title{font-size:13px}
+  .highlight{padding:10px 14px;font-size:13px;margin:12px 0}
+  .highlight-label{font-size:10px;margin-bottom:4px}
+  .doc-footer{margin-top:32px;padding-top:12px;font-size:11px;flex-direction:column;gap:4px}
+  .content blockquote{padding:4px 12px;margin:12px 0;font-size:13px}
+  details.collapsible>summary{padding:10px 12px;font-size:13px;min-height:38px}
+  details.collapsible>summary::after{font-size:16px}
+  .collapsible-body{padding:4px 12px 12px}
+  .content img{max-width:100%;height:auto}
+  .brand{font-size:13px}
+  .brand-dot{width:8px;height:8px}
+  .sidebar-section{font-size:10px;padding:12px 14px 4px}
+  .sidebar-nav a{font-size:13px;min-height:40px;padding:10px 14px}
+  .copy-btn{width:28px;height:28px;opacity:.6;top:6px;right:6px}
+  .copy-btn .icon{width:12px;height:12px}
+}
+@media(min-width:901px){.mobile-menu{display:none!important}.sidebar{display:block!important}}
+@media print{.topbar,.sidebar,.backdrop,.mobile-menu{display:none!important}.layout{grid-template-columns:1fr;padding:0}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+<symbol id="i-danger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></symbol>
+<symbol id="i-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></symbol>
+</svg>
+
+<header class="topbar"><div class="topbar-inner">
+<div class="brand">
+<button class="btn mobile-menu" onclick="openSidebar()" aria-label="القائمة"><svg class="icon" viewBox="0 0 24 24"><use href="#i-menu"/></svg></button>
+<span class="brand-dot"></span><span>موسوعة هيرميس</span>
+</div>
+<div class="topbar-actions">
+<button class="btn" onclick="toggleTheme()" aria-label="المظهر"><svg class="icon" viewBox="0 0 24 24"><use id="ti" href="#i-moon"/></svg></button>
+</div>
+</div></header>
+
+<div class="backdrop" id="backdrop" onclick="closeSidebar()"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+<button class="mobile-close" onclick="closeSidebar()"><svg class="icon" viewBox="0 0 24 24"><use href="#i-x"/></svg></button>
+<nav class="sidebar-nav" id="sidebar-nav">
+<p class="sidebar-section">📂 عام</p>
+<a data-slug="index" onclick="showPage('index')">مرحباً بك في موسوعة هيرميس</a>
+<p class="sidebar-section">📂 البدء</p>
+<a data-slug="configuration" onclick="showPage('configuration')">الإعدادات والتكوين</a>
+<a data-slug="installation" onclick="showPage('installation')">⚕ هيرميس على أندرويد — دليل التثبيت الكامل</a>
+<a data-slug="post-install" onclick="showPage('post-install')">بعد التثبيت — الإعداد والتكوين</a>
+<p class="sidebar-section">📂 متقدم</p>
+<a data-slug="cron-jobs" onclick="showPage('cron-jobs')">المهام المجدولة (Cron)</a>
+<a data-slug="gateway" onclick="showPage('gateway')">بوابات المراسلة والتعايش مع OpenClaw</a>
+<a data-slug="skills-guide" onclick="showPage('skills-guide')">دليل المهارات</a>
+<a data-slug="webui" onclick="showPage('webui')">واجهة الويب المعرّبة (Hermes WebUI)</a>
+<p class="sidebar-section">📂 دعم</p>
+<a data-slug="troubleshooting" onclick="showPage('troubleshooting')">استكشاف الأخطاء والمشاكل المعروفة</a>
+
+</nav>
+</aside>
+<main class="content" id="main">
+
+<div class="page" id="page-index">
+<header class="doc-header">
+<span class="doc-eyebrow">عام</span>
+<h1 class="doc-title">مرحباً بك في موسوعة هيرميس</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> index.md</span></div>
+</header>
+<h1 id="مرحباً-بك-في-موسوعة-هيرميس">🏠 مرحباً بك في موسوعة هيرميس</h1>
+<p>هذه الموسوعة هي المرجع الشامل لكل ما يتعلق بـ <strong>وكيل هيرميس (Hermes Agent)</strong> — الوكيل الذكي ذاتي التطوير من <a href="https://nousresearch.com">Nous Research</a>.</p>
+<h2 id="ما-هو-هيرميس؟">🧠 ما هو هيرميس؟</h2>
+<p>هيرميس هو وكيل ذكاء اصطناعي <strong>ذاتي التطوير</strong> — يتعلم من التجارب، ينشئ مهاراته الخاصة، وينفذ مهام معقدة بشكل مستقل. صُمم ليكون:</p>
+<ul>
+<li><strong>معيارياً</strong>: كل شيء إضافة — مهارات، أدوات، بوابات رسائل</li>
+<li><strong>متعدد النماذج</strong>: يعمل مع OpenAI و Anthropic و OpenRouter و Ollama المحلي</li>
+<li><strong>متعدد المنصات</strong>: لينكس، macOS، ويندوز، أندرويد (Termux)، و VPS</li>
+<li><strong>ذاكرة طويلة المدى</strong>: يتذكر السياق عبر الجلسات ويتعلم من التجارب</li>
+</ul>
+<h2 id="تصفح-الموسوعة">📚 تصفح الموسوعة</h2>
+<p>اختر أحد الأقسام من القائمة الجانبية للبدء:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>القسم</th><th>الوصف</th></tr></thead>
+<tbody><tr><td><a href="installation.html">التثبيت</a></td><td>تثبيت Hermes Agent على جميع المنصات</td></tr><tr><td><a href="configuration.html">الإعدادات</a></td><td>تكوين النماذج، المزودات، والأدوات</td></tr><tr><td><a href="skills-guide.html">المهارات</a></td><td>إنشاء وإدارة المهارات المخصصة</td></tr><tr><td><a href="gateway.html">البوابات</a></td><td>ربط هيرميس مع تيليغرام، ديسكورد، واتساب</td></tr><tr><td><a href="cron-jobs.html">المهام المجدولة</a></td><td>أتمتة المهام المتكررة والمراقبة</td></tr><tr><td><a href="webui.html">واجهة الويب</a></td><td>تشغيل وإدارة واجهة Hermes WebUI</td></tr><tr><td><a href="troubleshooting.html">استكشاف الأخطاء</a></td><td>حلول للمشاكل الشائعة</td></tr></tbody></table></div>
+<div class="highlight"><span class="highlight-label">الفكرة الجوهرية</span><p>هيرميس ليس مجرد chatbot — هو <strong>وكيل مستقل</strong> يمكنه تنفيذ مهام معقدة، جدولة عمليات، مراقبة أنظمة، والتفاعل مع APIs خارجية بدون تدخل بشري.</p></div>
+<aside class="callout callout-info"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-info"/></svg><div class="callout-body"><p class="callout-title">معلومة</p><p><strong>جديد في هيرميس؟</strong> ابدأ بـ <a href="installation.html">دليل التثبيت</a> ثم <a href="configuration.html">دليل الإعدادات</a>.</p></div></aside>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>index.md</span></footer>
+</div>
+
+<div class="page" id="page-configuration">
+<header class="doc-header">
+<span class="doc-eyebrow">البدء</span>
+<h1 class="doc-title">الإعدادات والتكوين</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> configuration.md</span></div>
+</header>
+<h1 id="الإعدادات-والتكوين">⚙ الإعدادات والتكوين</h1>
+<p>دليل شامل لتكوين Hermes Agent بعد التثبيت.</p>
+<h2 id="الإعداد-الأولي">🚀 الإعداد الأولي</h2>
+<p>شغّل معالج الإعداد التفاعلي:</p>
+<pre><code class="language-bash">hermes setup</code></pre>
+<p>سيطلب منك المعالج:</p>
+<ol>
+<li><strong>المزود (Provider)</strong>: OpenAI، Anthropic، OpenRouter، إلخ</li>
+<li><strong>مفتاح API</strong>: المفتاح الخاص بمزودك</li>
+<li><strong>النموذج الافتراضي</strong>: النموذج الذي سيُستخدم في المحادثات</li>
+<li><strong>تفضيلات الأدوات</strong>: الأدوات التي تريد تفعيلها</li>
+</ol>
+<h2 id="اختيار-النموذج">🤖 اختيار النموذج</h2>
+<p>استخدم أمر <code>hermes model</code> لتغيير النموذج في أي وقت:</p>
+<pre><code class="language-bash">hermes model</code></pre>
+<h3 id="المزودات-المدعومة">المزودات المدعومة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المزود</th><th>المميزات</th><th>التكلفة</th></tr></thead>
+<tbody><tr><td><strong>Nous Portal</strong></td><td>نماذج Hermes الأصلية، بدون مفتاح API</td><td>مجاني</td></tr><tr><td><strong>OpenRouter</strong></td><td>200+ نموذج من مزودين متعددين</td><td>ادفع حسب الاستخدام</td></tr><tr><td><strong>OpenAI</strong></td><td>GPT-4o، GPT-4.1، o3</td><td>حسب الاستهلاك</td></tr><tr><td><strong>Anthropic</strong></td><td>Claude Sonnet 4، Opus 4</td><td>حسب الاستهلاك</td></tr><tr><td><strong>DeepSeek</strong></td><td>DeepSeek-V3، R1</td><td>اقتصادي</td></tr><tr><td><strong>Ollama (محلي)</strong></td><td>نماذج محلية على جهازك</td><td>مجاني</td></tr></tbody></table></div>
+<div class="highlight"><span class="highlight-label">توصية</span><p>للمبتدئين: ابدأ بـ <strong>Nous Portal</strong> (مجاني، لا يحتاج مفتاح). للمستخدمين المتقدمين: <strong>Anthropic Claude</strong> يعطي أفضل أداء للمهام المعقدة.</p></div>
+<h2 id="ملف-الإعدادات">📝 ملف الإعدادات</h2>
+<p>الإعدادات مخزنة في <code>~/.hermes/config.yaml</code>. يمكنك تعديلها يدوياً:</p>
+<pre><code class="language-yaml"># مثال: ~/.hermes/config.yaml
+models:
+  default: anthropic/claude-sonnet-4
+  fallback: openrouter/anthropic/claude-sonnet-4
+
+providers:
+  anthropic:
+    api_key: sk-ant-...
+  openrouter:
+    api_key: sk-or-...
+
+tools:
+  browser: true
+  terminal: true
+  image_gen: true
+  tts: true
+
+gateway:
+  telegram:
+    enabled: true</code></pre>
+<h2 id="متغيرات-البيئة">🔧 متغيرات البيئة</h2>
+<p>يمكن أيضاً استخدام متغيرات البيئة (<code>.env</code>):</p>
+<pre><code class="language-bash"># ~/.hermes/.env
+ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+OPENROUTER_API_KEY=sk-or-...
+GROQ_API_KEY=gsk_...
+TELEGRAM_BOT_TOKEN=123456:ABC...</code></pre>
+<h2 id="تفعيل-الأدوات">🧩 تفعيل الأدوات</h2>
+<p>هيرميس يأتي مع مجموعة غنية من الأدوات:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>الأداة</th><th>الوصف</th></tr></thead>
+<tbody><tr><td><code>terminal</code></td><td>تنفيذ أوامر shell</td></tr><tr><td><code>file</code></td><td>قراءة وكتابة الملفات</td></tr><tr><td><code>web</code></td><td>بحث وب وتصفح</td></tr><tr><td><code>browser</code></td><td>تصفح مواقع بتقنية Playwright</td></tr><tr><td><code>image_gen</code></td><td>توليد صور بالذكاء الاصطناعي</td></tr><tr><td><code>tts</code></td><td>تحويل النص إلى كلام</td></tr><tr><td><code>vision</code></td><td>تحليل الصور</td></tr><tr><td><code>cronjob</code></td><td>جدولة المهام المتكررة</td></tr><tr><td><code>memory</code></td><td>ذاكرة طويلة المدى</td></tr></tbody></table></div>
+<p>لتفعيل/تعطيل الأدوات:</p>
+<pre><code class="language-bash">hermes tools enable browser
+hermes tools disable image_gen</code></pre>
+<h2 id="التالي">⏭ التالي</h2>
+<p>بعد الإعداد: <a href="skills-guide.html">دليل المهارات</a></p>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>configuration.md</span></footer>
+</div>
+
+<div class="page" id="page-installation">
+<header class="doc-header">
+<span class="doc-eyebrow">البدء</span>
+<h1 class="doc-title">⚕ هيرميس على أندرويد — دليل التثبيت الكامل</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> installation.md</span></div>
+</header>
+<h1 id="هيرميس-على-أندرويد">⚕ هيرميس على أندرويد</h1>
+<p>شغّل وكيل هيرميس الذكي — الوكيل ذاتي التطوير من Nous Research — مباشرةً على هاتفك الأندرويد عبر Termux.</p>
+<h2 id="ما-هذا-المشروع؟">📱 ما هذا المشروع؟</h2>
+<p>هذا المشروع يوفر كل ما تحتاجه لتثبيت وتشغيل <strong>وكيل هيرميس</strong> على هاتف أندرويد باستخدام Termux. يحتوي على سكريبت تثبيت مخصص، تصحيحات خاصة بأندرويد، وأدلة خطوة بخطوة بالعربية والإنجليزية.</p>
+<p>وكيل هيرميس هو وكيل ذكاء اصطناعي ذاتي التطوير:</p>
+<ul>
+<li>يتعلم من التجارب وينشئ مهاراته الخاصة</li>
+<li>يعمل مع أي نموذج لغوي (OpenAI، Anthropic، OpenRouter، NVIDIA NIM، Ollama محلي...)</li>
+<li>يتصل بتيليغرام، ديسكورد، سلاك، واتساب، سيغنال</li>
+<li>يشغّل أتمتة مجدولة (cron)</li>
+<li>يمتلك ذاكرة طويلة المدى واستدعاء عبر الجلسات</li>
+</ul>
+<div class="highlight"><span class="highlight-label">الفكرة الجوهرية</span><p>والآن يعمل على هاتفك. <strong>بدون حاجة للابتوب أو VPS.</strong></p></div>
+<h2 id="تثبيت-سريع">⚡ تثبيت سريع</h2>
+<p>تأكد من تثبيت Termux من F-Droid، ثم نفّذ:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/leecoin06-commits/hermes-agent-android/main/install-android.sh | bash</code></pre>
+<p>هذا الأمر الواحد سيقوم بـ:</p>
+<ol>
+<li>تثبيت جميع الحزم النظامية المطلوبة</li>
+<li>استنساخ مستودع Hermes Agent</li>
+<li>إنشاء بيئة Python افتراضية</li>
+<li>تطبيق التصحيحات الخاصة بأندرويد</li>
+<li>تجميع وتثبيت جميع الاعتماديات</li>
+<li>جعل أمر <code>hermes</code> متاحاً على مسار Termux</li>
+</ol>
+<aside class="callout callout-warn"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-warn"/></svg><div class="callout-body"><p class="callout-title">وقت التثبيت</p><p><strong>التثبيت يستغرق 10–30 دقيقة</strong> لأن بعض الحزم الأساسية (<code>pydantic-core</code>، <code>cryptography</code>، <code>uvloop</code>) تُجمّع من شيفرات Rust/C المصدرية على معالج ARM.</p></div></aside>
+<h2 id="المتطلبات">📋 المتطلبات</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>المتطلب</th><th>ملاحظات</th></tr></thead>
+<tbody><tr><td><strong>Termux</strong></td><td>ثبته من F-Droid (وليس Google Play)</td></tr><tr><td><strong>أندرويد 7+</strong></td><td>يعمل على أندرويد 7 أو أحدث</td></tr><tr><td><strong>~3 جيجابايت مساحة</strong></td><td>للمستودع + البيئة الافتراضية + الحزم</td></tr><tr><td><strong>اتصال إنترنت</strong></td><td>لاستنساخ وتحميل الحزم</td></tr><tr><td><strong>4 جيجابايت RAM+</strong></td><td>مُوصى به لتجميع الحزم بسلاسة</td></tr></tbody></table></div>
+<h2 id="التثبيت-اليدوي-خطوة-بخطوة">🛠 التثبيت اليدوي (خطوة بخطوة)</h2>
+<p>إذا كنت تفضل التحكم الكامل في عملية التثبيت:</p>
+<h3 id="1-تثبيت-termux-والحزم-النظامية">1. تثبيت Termux والحزم النظامية</h3>
+<pre><code class="language-bash">pkg update
+pkg install -y git python clang rust make pkg-config libffi openssl nodejs ripgrep ca-certificates curl
+pkg install -y python-psutil</code></pre>
+<h3 id="2-استنساخ-hermes-agent">2. استنساخ Hermes Agent</h3>
+<pre><code class="language-bash">mkdir -p ~/.hermes
+git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git ~/.hermes/hermes-agent
+cd ~/.hermes/hermes-agent</code></pre>
+<h3 id="3-إنشاء-البيئة-الافتراضية">3. إنشاء البيئة الافتراضية</h3>
+<pre><code class="language-bash">python -m venv venv
+source venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install maturin</code></pre>
+<h3 id="4-ربط-psutil-النظامي">4. ربط psutil النظامي</h3>
+<pre><code class="language-bash">VENV_SITE=$(python -c &quot;import site; print(site.getsitepackages()[0])&quot;)
+echo &quot;/data/data/com.termux/files/usr/lib/python3.13/site-packages&quot; &gt; &quot;$VENV_SITE/system-site.pth&quot;</code></pre>
+<h3 id="5-تعديل-pyprojecttoml">5. تعديل pyproject.toml</h3>
+<pre><code class="language-bash">sed -i &#x27;s/&quot;psutil&gt;=5.9.0,&lt;8&quot;,/# &quot;psutil&gt;=5.9.0,&lt;8&quot;, # Termux/&#x27; pyproject.toml</code></pre>
+<h3 id="6-تثبيت-hermes">6. تثبيت Hermes</h3>
+<pre><code class="language-bash">export ANDROID_API_LEVEL=&quot;$(getprop ro.build.version.sdk)&quot;
+pip install -e &#x27;.[termux-all]&#x27; -c constraints-termux.txt</code></pre>
+<h3 id="7-جعل-hermes-متاحاً-في-المسار">7. جعل <code>hermes</code> متاحاً في المسار</h3>
+<pre><code class="language-bash">ln -sf ~/.hermes/hermes-agent/venv/bin/hermes $PREFIX/bin/hermes</code></pre>
+<h3 id="8-التحقق">8. التحقق</h3>
+<pre><code class="language-bash">hermes version
+hermes doctor</code></pre>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">تم بنجاح</p><p>إذا ظهرت أرقام الإصدار بدون أخطاء — التثبيت ناجح! 🎉</p></div></aside>
+<h2 id="بعد-التثبيت--ماذا-بعد؟">🚀 بعد التثبيت — ماذا بعد؟</h2>
+<p>بعد اكتمال التثبيت، انتقل إلى:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>الخطوة</th><th>الأمر</th><th>الوصف</th></tr></thead>
+<tbody><tr><td><strong>الإعداد الأولي</strong></td><td><code>hermes setup</code></td><td>معالج تفاعلي لضبط المزود والمفاتيح</td></tr><tr><td><strong>اختيار النموذج</strong></td><td><code>hermes model</code></td><td>اختر النموذج المناسب (Nous Portal مجاني)</td></tr><tr><td><strong>بدء المحادثة</strong></td><td><code>hermes</code></td><td>واجهة CLI متكاملة</td></tr><tr><td><strong>بوابة تيليغرام</strong></td><td><code>hermes gateway setup</code></td><td>تواصل مع هيرميس عبر تيليغرام</td></tr></tbody></table></div>
+<aside class="callout callout-info"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-info"/></svg><div class="callout-body"><p class="callout-title">معلومة</p><p>تفاصيل كل خطوة في صفحة <a href="post-install.html">ما بعد التثبيت</a>.</p></div></aside>
+<h2 id="المشاكل-المعروفة">🐛 المشاكل المعروفة</h2>
+<details class="collapsible"><summary>خطأ ربط ffmpeg</summary><div class="collapsible-body"></div></details>
+<pre><code>CANNOT LINK EXECUTABLE &quot;ffmpeg&quot;: cannot locate symbol &quot;x265_api_get_215&quot;</code></pre>
+<p><strong>الإصلاح:</strong></p>
+<pre><code class="language-bash">pkg upgrade
+dpkg --remove --force-depends ffmpeg
+pkg install ffmpeg</code></pre>
+<details class="collapsible"><summary>وقت التجميع الطويل</summary><div class="collapsible-body"></div></details>
+<p>التثبيت الأول يستغرق 10–30 دقيقة لأن حزماً مثل <code>pydantic-core</code> و <code>cryptography</code> تُجمّع من الشيفرات المصدرية. التشغيلات اللاحقة أسرع بكثير.</p>
+<details class="collapsible"><summary>عمليات Termux الخلفية</summary><div class="collapsible-body"></div></details>
+<p>قد يعلّق أندرويد عمليات Termux الخلفية. استخدم <code>termux-wake-lock</code> أو أبقِ Termux في وضع تقسيم الشاشة.</p>
+<details class="collapsible"><summary>أدوات المتصفح وتحويل الصوت</summary><div class="collapsible-body"></div></details>
+<p><strong>Playwright:</strong> تجريبية على أندرويد.</p>
+<p><strong>تحويل الصوت:</strong> استخدم Groq Whisper (<code>GROQ_API_KEY</code>) أو OpenAI Whisper (<code>VOICE_TOOLS_OPENAI_KEY</code>).</p>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="post-install.html">ما بعد التثبيت — الإعداد والتكوين</a></li>
+<li><a href="configuration.html">اختيار النموذج المناسب</a></li>
+<li><a href="troubleshooting.html">استكشاف الأخطاء</a></li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>installation.md</span></footer>
+</div>
+
+<div class="page" id="page-post-install">
+<header class="doc-header">
+<span class="doc-eyebrow">البدء</span>
+<h1 class="doc-title">بعد التثبيت — الإعداد والتكوين</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> post-install.md</span></div>
+</header>
+<h1 id="بعد-التثبيت">🚀 بعد التثبيت</h1>
+<p>بعد تثبيت Hermes Agent بنجاح، اتبع هذه الخطوات لتشغيله.</p>
+<h2 id="الإعداد-الأولي">⚙ الإعداد الأولي</h2>
+<p>شغّل معالج الإعداد التفاعلي:</p>
+<pre><code class="language-bash">hermes setup</code></pre>
+<p>سيطلب منك المعالج:</p>
+<ol>
+<li><strong>المزود (Provider)</strong>: OpenAI، Anthropic، OpenRouter، DeepSeek، إلخ</li>
+<li><strong>مفتاح API</strong>: المفتاح الخاص بمزودك</li>
+<li><strong>النموذج الافتراضي</strong>: النموذج الذي سيُستخدم في المحادثات</li>
+<li><strong>تفضيلات الأدوات</strong>: الأدوات التي تريد تفعيلها (terminal، browser، web، إلخ)</li>
+</ol>
+<h2 id="اختيار-النموذج">🤖 اختيار النموذج</h2>
+<p>استخدم أمر <code>hermes model</code> لتغيير النموذج في أي وقت:</p>
+<pre><code class="language-bash">hermes model</code></pre>
+<h3 id="المزودات-المتاحة">المزودات المتاحة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المزود</th><th>المميزات</th><th>التكلفة</th></tr></thead>
+<tbody><tr><td><strong>Nous Portal</strong> ★</td><td>نماذج Hermes الأصلية، بدون مفتاح API</td><td>مجاني</td></tr><tr><td><strong>OpenRouter</strong></td><td>200+ نموذج من مزودين متعددين</td><td>ادفع حسب الاستخدام</td></tr><tr><td><strong>OpenAI / Anthropic</strong></td><td>GPT-4o، Claude Sonnet 4</td><td>بمفاتيح API الخاصة بك</td></tr><tr><td><strong>DeepSeek</strong></td><td>DeepSeek-V3، R1</td><td>اقتصادي</td></tr><tr><td><strong>Ollama محلي</strong></td><td>شغّل النماذج محلياً على هاتفك</td><td>مجاني</td></tr></tbody></table></div>
+<div class="highlight"><span class="highlight-label">توصية</span><p>للمبتدئين: ابدأ بـ <strong>Nous Portal</strong> (مجاني، لا يحتاج مفتاح). للمستخدمين المتقدمين: <strong>Anthropic Claude</strong> يعطي أفضل أداء للمهام المعقدة.</p></div>
+<h2 id="بدء-المحادثة-cli">💬 بدء المحادثة (CLI)</h2>
+<p>لبدء محادثة مباشرة من الطرفية:</p>
+<pre><code class="language-bash">hermes</code></pre>
+<p>يفتح واجهة طرفية متكاملة مع:</p>
+<ul>
+<li>تحرير متعدد الأسطر</li>
+<li>إكمال تلقائي</li>
+<li>مخرجات أدوات متدفقة</li>
+<li>تاريخ المحادثات</li>
+</ul>
+<h2 id="بوابة-تيليغرام">📱 بوابة تيليغرام</h2>
+<p>لربط هيرميس مع تيليغرام والتحكم فيه عن بعد:</p>
+<pre><code class="language-bash">hermes gateway setup
+hermes gateway run</code></pre>
+<h3 id="إنشاء-بوت-تيليغرام">إنشاء بوت تيليغرام</h3>
+<ol>
+<li>تحدث مع <a href="https://t.me/BotFather">@BotFather</a> على تيليغرام</li>
+<li>أرسل <code>/newbot</code> واتبع التعليمات</li>
+<li>انسخ <strong>توكن البوت</strong> (مثل <code>123456789:ABCdef...</code>)</li>
+<li>الصقه في <code>hermes gateway setup</code></li>
+</ol>
+<aside class="callout callout-warn"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-warn"/></svg><div class="callout-body"><p class="callout-title">تنبيه</p><p>إذا كنت تشغّل <strong>OpenClaw أو وكيلاً آخر</strong>، استخدم توكن بوت تيليغرام مختلف لكل وكيل.</p></div></aside>
+<h2 id="التعايش-مع-openclaw">🔄 التعايش مع OpenClaw</h2>
+<p>إذا كنت تستخدم أكثر من وكيل على نفس الجهاز:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>الوكيل</th><th>البوت</th><th>الطريقة</th></tr></thead>
+<tbody><tr><td><strong>Hermes</strong></td><td>بوت #1</td><td><code>hermes gateway setup</code></td></tr><tr><td><strong>OpenClaw</strong></td><td>بوت #2</td><td>اضبط في إعدادات OpenClaw بتوكن مختلف</td></tr></tbody></table></div>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">بدون تعارض</p><p>مع توكنات منفصلة، يعمل كلا الوكيلين معاً دون تعارض.</p></div></aside>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="configuration.html">الإعدادات المتقدمة</a> — تخصيص كامل للنظام</li>
+<li><a href="webui.html">واجهة الويب المعرّبة</a> — تحكم مرئي بالعربية</li>
+<li><a href="skills-guide.html">دليل المهارات</a> — توسيع قدرات هيرميس</li>
+<li><a href="gateway.html">البوابات</a> — ربط مع ديسكورد وواتساب والمزيد</li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>post-install.md</span></footer>
+</div>
+
+<div class="page" id="page-cron-jobs">
+<header class="doc-header">
+<span class="doc-eyebrow">متقدم</span>
+<h1 class="doc-title">المهام المجدولة (Cron)</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> cron-jobs.md</span></div>
+</header>
+<h1 id="المهام-المجدولة-cron-jobs">⏰ المهام المجدولة (Cron Jobs)</h1>
+<p>هيرميس يدعم جدولة مهام متكررة تعمل تلقائياً — مثالية للمراقبة والتقارير والأتمتة.</p>
+<h2 id="الجدولة-الأساسية">🕐 الجدولة الأساسية</h2>
+<h3 id="إنشاء-مهمة-مجدولة">إنشاء مهمة مجدولة</h3>
+<pre><code class="language-bash">hermes cron create &quot;تحقق من أسعار العملات كل ساعة&quot; --schedule &quot;0 * * * *&quot;</code></pre>
+<h3 id="صيغ-الجدولة-المدعومة">صيغ الجدولة المدعومة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الصيغة</th><th>مثال</th><th>الوصف</th></tr></thead>
+<tbody><tr><td><strong>Cron expression</strong></td><td><code>0 9 <em> </em> *</code></td><td>الساعة 9 صباحاً يومياً</td></tr><tr><td><strong>اختصار</strong></td><td><code>30m</code></td><td>كل 30 دقيقة</td></tr><tr><td><strong>اختصار</strong></td><td><code>every 2h</code></td><td>كل ساعتين</td></tr><tr><td><strong>مرة واحدة</strong></td><td><code>once</code></td><td>تشغيل مرة واحدة</td></tr><tr><td><strong>ISO timestamp</strong></td><td><code>2026-06-01T09:00:00</code></td><td>في وقت محدد</td></tr></tbody></table></div>
+<h3 id="أمثلة-cron-expressions">أمثلة cron expressions</h3>
+<pre><code>0 9 * * *       # 9:00 صباحاً يومياً
+0 */6 * * *     # كل 6 ساعات
+30 8 * * 1-5    # 8:30 صباحاً، الاثنين للجمعة
+0 0 1 * *       # منتصف ليل أول يوم من كل شهر</code></pre>
+<h2 id="إدارة-المهام">📋 إدارة المهام</h2>
+<pre><code class="language-bash"># عرض جميع المهام
+hermes cron list
+
+# تفاصيل مهمة محددة
+hermes cron show &lt;job_id&gt;
+
+# إيقاف مؤقت
+hermes cron pause &lt;job_id&gt;
+
+# استئناف
+hermes cron resume &lt;job_id&gt;
+
+# تشغيل يدوي الآن
+hermes cron run &lt;job_id&gt;
+
+# حذف مهمة
+hermes cron delete &lt;job_id&gt;</code></pre>
+<h2 id="سلسلة-المهام-chaining">🔗 سلسلة المهام (Chaining)</h2>
+<p>يمكن ربط المهام بحيث تعتمد مخرجات مهمة على أخرى:</p>
+<pre><code class="language-bash"># المهمة A: جمع البيانات
+hermes cron create &quot;جمع بيانات السوق&quot; --schedule &quot;*/15 * * * *&quot; --name &quot;market-collector&quot;
+
+# المهمة B: تحليل البيانات (تستخدم مخرجات A)
+hermes cron create &quot;تحليل اتجاهات السوق&quot; --schedule &quot;*/30 * * * *&quot; --context-from &quot;market-collector&quot;</code></pre>
+<h2 id="توجيه-النتائج-delivery">📨 توجيه النتائج (Delivery)</h2>
+<p>تحديد أين تُرسل نتائج المهمة:</p>
+<pre><code class="language-bash"># إرسال للجلسة الحالية + تيليغرام
+hermes cron create &quot;تقرير يومي&quot; --schedule &quot;0 9 * * *&quot; --deliver &quot;origin,telegram&quot;
+
+# إرسال لقناة تيليغرام محددة
+hermes cron create &quot;تنبيهات&quot; --schedule &quot;*/5 * * * *&quot; --deliver &quot;telegram:-1001234567890&quot;</code></pre>
+<h2 id="مهارات-cron">🛠 مهارات Cron</h2>
+<p>يمكن ربط المهام بمهارات محددة:</p>
+<pre><code class="language-bash">hermes cron create &quot;مراقبة العملات&quot; \
+  --schedule &quot;*/15 * * * *&quot; \
+  --skills &quot;crypto-monitoring&quot; \
+  --deliver &quot;telegram&quot;</code></pre>
+<h2 id="أمثلة-عملية">📊 أمثلة عملية</h2>
+<h3 id="1-مراقب-أسعار-العملات-الرقمية">1. مراقب أسعار العملات الرقمية</h3>
+<pre><code class="language-bash">hermes cron create &quot;مراقبة BTC و ETH&quot; \
+  --schedule &quot;*/15 * * * *&quot; \
+  --prompt &quot;تحقق من أسعار BTC و ETH الحالية. إذا تغير السعر أكثر من 2%، أرسل تنبيه.&quot; \
+  --deliver &quot;telegram&quot;</code></pre>
+<h3 id="2-تقرير-يومي">2. تقرير يومي</h3>
+<pre><code class="language-bash">hermes cron create &quot;تقرير الصباح&quot; \
+  --schedule &quot;0 8 * * *&quot; \
+  --prompt &quot;قدم تقريراً صباحياً: حالة النظام، الأخبار المهمة، مهام اليوم.&quot; \
+  --deliver &quot;origin,telegram&quot;</code></pre>
+<h3 id="3-نسخ-احتياطي">3. نسخ احتياطي</h3>
+<pre><code class="language-bash">hermes cron create &quot;نسخ احتياطي أسبوعي&quot; \
+  --schedule &quot;0 2 * * 0&quot; \
+  --prompt &quot;قم بعمل نسخة احتياطية لملفات الإعدادات والمهارات في ~/.hermes/backups/&quot; \
+  --deliver &quot;local&quot;</code></pre>
+<h3 id="4-مراقب-استخدام-الموارد">4. مراقب استخدام الموارد</h3>
+<pre><code class="language-bash">hermes cron create &quot;مراقب النظام&quot; \
+  --schedule &quot;*/10 * * * *&quot; \
+  --script &quot;~/scripts/check_resources.sh&quot; \
+  --no_agent true \
+  --deliver &quot;telegram&quot;</code></pre>
+<p>حيث <code>check_resources.sh</code>:</p>
+<pre><code class="language-bash">#!/bin/bash
+CPU=$(top -bn1 | grep &quot;Cpu(s)&quot; | awk &#x27;{print $2}&#x27; | cut -d&#x27;%&#x27; -f1)
+MEM=$(free | grep Mem | awk &#x27;{printf &quot;%.0f&quot;, $3/$2 * 100}&#x27;)
+if (( $(echo &quot;$CPU &gt; 80&quot; | bc -l) )) || [ &quot;$MEM&quot; -gt 80 ]; then
+    echo &quot;⚠️ تحذير: CPU ${CPU}% | RAM ${MEM}%&quot;
+fi</code></pre>
+<aside class="callout callout-warn"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-warn"/></svg><div class="callout-body"><p class="callout-title">تنبيه</p><p><strong>انتبه</strong>: نافذة المهام لمرة واحدة (one-shot) هي 120 ثانية فقط. استخدم <code>interval</code> مع <code>repeat=1</code> أو <code>cron expression</code> للمهام الطويلة.</p></div></aside>
+<aside class="callout callout-info"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-info"/></svg><div class="callout-body"><p class="callout-title">معلومة</p><p><strong>تلميح</strong>: استخدم <code>--no_agent true</code> مع <code>--script</code> لتشغيل سكريبتات Bash/Python مباشرة بدون استهلاك رصيد LLM. مثالي للمراقبة الخفيفة.</p></div></aside>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="webui.html">واجهة الويب</a> — إدارة مرئية</li>
+<li><a href="troubleshooting.html">استكشاف الأخطاء</a> — حل المشاكل</li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>cron-jobs.md</span></footer>
+</div>
+
+<div class="page" id="page-gateway">
+<header class="doc-header">
+<span class="doc-eyebrow">متقدم</span>
+<h1 class="doc-title">بوابات المراسلة والتعايش مع OpenClaw</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> gateway.md</span></div>
+</header>
+<h1 id="بوابات-المراسلة">📡 بوابات المراسلة</h1>
+<p>بوابات هيرميس تسمح لك بالتفاعل مع الوكيل عبر تطبيقات المراسلة المفضلة لديك.</p>
+<h2 id="البوابات-المدعومة">📱 البوابات المدعومة</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>البوابة</th><th>الحالة</th><th>المميزات</th></tr></thead>
+<tbody><tr><td><strong>تيليغرام</strong></td><td>✅ مستقر</td><td>بوت كامل، دعم media، أزرار تفاعلية</td></tr><tr><td><strong>ديسكورد</strong></td><td>✅ مستقر</td><td>خوادم وقنوات</td></tr><tr><td><strong>سلاك</strong></td><td>✅ مستقر</td><td>قنوات ورسائل مباشرة</td></tr><tr><td><strong>واتساب</strong></td><td>⚠️ تجريبي</td><td>عبر Baileys</td></tr><tr><td><strong>سيغنال</strong></td><td>⚠️ تجريبي</td><td>عبر signal-cli</td></tr><tr><td><strong>ماتريكس</strong></td><td>✅ مستقر</td><td>غرف ومحادثات مباشرة</td></tr></tbody></table></div>
+<h2 id="إعداد-بوت-تيليغرام">🤖 إعداد بوت تيليغرام</h2>
+<h3 id="1-إنشاء-البوت">1. إنشاء البوت</h3>
+<p>تحدث مع <a href="https://t.me/BotFather">@BotFather</a>:</p>
+<pre><code>/newbot
+HermesAssistant
+hermes_yourname_bot</code></pre>
+<p>ستحصل على <strong>توكن البوت</strong> (مثل <code>123456789:ABCdef...</code>).</p>
+<h3 id="2-تكوين-البوابة">2. تكوين البوابة</h3>
+<pre><code class="language-bash">hermes gateway setup</code></pre>
+<p>اختر &quot;Telegram&quot; وأدخل التوكن.</p>
+<p>أو يدوياً في <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">gateway:
+  telegram:
+    enabled: true
+    bot_token: &quot;123456789:ABCdef...&quot;
+    allowed_users: []</code></pre>
+<h3 id="3-تشغيل-البوابة">3. تشغيل البوابة</h3>
+<pre><code class="language-bash">hermes gateway run</code></pre>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">تم بنجاح</p><p><strong>البوت جاهز!</strong> ابحث عن بوتك على تيليغرام وابدأ المحادثة.</p></div></aside>
+<h2 id="التعايش-مع-openclaw-ووكلاء-آخرين">🔄 التعايش مع OpenClaw ووكلاء آخرين</h2>
+<p>إذا كنت تشغّل <strong>OpenClaw</strong> أو أي وكيل آخر على نفس التطبيق:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>الوكيل</th><th>البوت</th><th>الطريقة</th></tr></thead>
+<tbody><tr><td><strong>Hermes</strong></td><td>بوت #1</td><td><code>hermes gateway setup</code></td></tr><tr><td><strong>OpenClaw</strong></td><td>بوت #2</td><td>توكن مختلف في إعدادات OpenClaw</td></tr></tbody></table></div>
+<p>باستخدام توكنات منفصلة، يعمل كلا الوكيلين معاً دون تعارض.</p>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">بدون تعارض</p><p>مع توكنات منفصلة، يعمل كلا الوكيلين معاً دون أي مشاكل.</p></div></aside>
+<h2 id="إعداد-ديسكورد">💬 إعداد ديسكورد</h2>
+<pre><code class="language-yaml">gateway:
+  discord:
+    enabled: true
+    bot_token: &quot;your_discord_bot_token&quot;
+    channels:
+      - &quot;general&quot;
+      - &quot;hermes-chat&quot;</code></pre>
+<ol>
+<li>اذهب إلى <a href="https://discord.com/developers/applications">Discord Developer Portal</a></li>
+<li>أنشئ تطبيقاً جديداً</li>
+<li>Bot → Add Bot → انسخ التوكن</li>
+<li>ادعُ البوت إلى خادمك</li>
+</ol>
+<h2 id="الأمان-والصلاحيات">🛡 الأمان والصلاحيات</h2>
+<pre><code class="language-yaml">gateway:
+  security:
+    allowed_users:
+      telegram: [123456789, 987654321]
+      discord: [&quot;user_id_1&quot;]
+    require_auth: true</code></pre>
+<aside class="callout callout-warn"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-warn"/></svg><div class="callout-body"><p class="callout-title">تنبيه أمني</p><p>لا تشارك توكنات البوتات أبداً. إذا تم تسريب توكن، استبدله فوراً من BotFather أو Discord Developer Portal.</p></div></aside>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="cron-jobs.html">المهام المجدولة</a> — أتمتة عبر الزمن</li>
+<li><a href="webui.html">واجهة الويب</a> — تحكم مرئي</li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>gateway.md</span></footer>
+</div>
+
+<div class="page" id="page-skills-guide">
+<header class="doc-header">
+<span class="doc-eyebrow">متقدم</span>
+<h1 class="doc-title">دليل المهارات</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> skills-guide.md</span></div>
+</header>
+<h1 id="دليل-المهارات">🧩 دليل المهارات</h1>
+<p>المهارات هي آلية هيرميس <strong>لتوسيع قدراته</strong> وتعلّم مهام جديدة. كل مهارة هي وحدة Python مستقلة تُضاف للنظام.</p>
+<h2 id="ما-هي-المهارة؟">📖 ما هي المهارة؟</h2>
+<p>المهارة في هيرميس هي:</p>
+<ul>
+<li><strong>كود Python</strong> ينفذ مهمة محددة</li>
+<li><strong>موثقة ذاتياً</strong> — هيرميس يقرأ الوصف ويعرف متى يستخدمها</li>
+<li><strong>قابلة للمشاركة</strong> — يمكن تثبيت مهارات من المجتمع</li>
+<li><strong>ذاتية التحميل</strong> — بمجرد وضعها في المجلد الصحيح</li>
+</ul>
+<h2 id="إنشاء-مهارة-جديدة">🛠 إنشاء مهارة جديدة</h2>
+<p>أبسط شكل للمهارة:</p>
+<pre><code class="language-python"># ~/.hermes/skills/my_skill.py
+from hermes.skill import skill
+
+@skill(
+    name=&quot;weather_lookup&quot;,
+    description=&quot;يحصل على حالة الطقس الحالية لمدينة محددة&quot;
+)
+def get_weather(city: str) -&gt; str:
+    &quot;&quot;&quot;Get current weather for a city.&quot;&quot;&quot;
+    # الكود الخاص بك هنا
+    return f&quot;حالة الطقس في {city}: مشمس، 25°C&quot;</code></pre>
+<h3 id="بنية-المهارة-المتقدمة">بنية المهارة المتقدمة</h3>
+<pre><code class="language-python">from hermes.skill import skill, SkillContext
+
+@skill(
+    name=&quot;code_reviewer&quot;,
+    description=&quot;يراجع كود Python ويقدم اقتراحات للتحسين&quot;,
+    triggers=[&quot;راجع الكود&quot;, &quot;code review&quot;, &quot;فحص الكود&quot;]
+)
+class CodeReviewer:
+    &quot;&quot;&quot;مراجع كود Python احترافي.&quot;&quot;&quot;
+
+    def __init__(self, ctx: SkillContext):
+        self.ctx = ctx
+        self.model = ctx.model  # النموذج النشط
+
+    async def execute(self, code: str, language: str = &quot;python&quot;) -&gt; dict:
+        &quot;&quot;&quot;
+        يراجع الكود ويعيد تقريراً.
+
+        المعاملات:
+            code: الكود المطلوب مراجعته
+            language: لغة البرمجة
+
+        المخرجات:
+            dict يحتوي على issues و suggestions و score
+        &quot;&quot;&quot;
+        # منطق المراجعة هنا
+        return {
+            &quot;issues&quot;: [...],
+            &quot;suggestions&quot;: [...],
+            &quot;score&quot;: 8.5
+        }</code></pre>
+<h2 id="هيكل-ملفات-المهارة">📁 هيكل ملفات المهارة</h2>
+<p>المهارات المعقدة يمكن تنظيمها في مجلد:</p>
+<pre><code>~/.hermes/skills/my-advanced-skill/
+├── SKILL.md           # وثائق المهارة (إجباري)
+├── __init__.py        # كود المهارة
+├── references/        # ملفات مرجعية
+│   └── api-docs.md
+├── templates/         # قوالب
+│   └── report.md
+└── scripts/           # سكريبتات مساعدة
+    └── validate.py</code></pre>
+<p>محتوى <code>SKILL.md</code>:</p>
+<pre><code class="language-markdown">---
+name: my-advanced-skill
+description: وصف موجز للمهارة
+version: 1.0.0
+author: اسمك
+tags: [تحليل, تقارير]
+---
+
+# My Advanced Skill
+
+وصف تفصيلي للمهارة...
+
+## الاستخدام
+
+...
+
+## المعاملات
+
+...</code></pre>
+<h2 id="تثبيت-مهارات-المجتمع">🔌 تثبيت مهارات المجتمع</h2>
+<p>هيرميس يدعم Registry عام للمهارات:</p>
+<pre><code class="language-bash"># البحث عن مهارات
+hermes skills search &quot;crypto trading&quot;
+
+# تثبيت مهارة
+hermes skills install hermes-crypto-evaluator
+
+# تحديث المهارات المثبتة
+hermes skills update
+
+# عرض المهارات المثبتة
+hermes skills list</code></pre>
+<h2 id="مهارات-cron-المهام-المجدولة">⚡ مهارات cron (المهام المجدولة)</h2>
+<p>المهارات يمكن أن تعمل كمهام Cron تلقائية:</p>
+<pre><code class="language-yaml"># مثال: مهارة تعمل كل ساعة
+---
+name: crypto-monitor
+schedule: &quot;0 * * * *&quot;
+enabled: true
+---</code></pre>
+<h2 id="أفضل-الممارسات">🎯 أفضل الممارسات</h2>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">تم بنجاح</p><p><strong>نصائح لمهارات فعالة</strong></p>
+<ul>
+<li>اكتب أوصافاً دقيقة — هيرميس يعتمد عليها لاختيار المهارة المناسبة</li>
+<li>استخدم type hints في Python</li>
+<li>عالج الأخطاء gracefully</li>
+<li>وثّق المخرجات بوضوح</li>
+</ul></div></aside>
+<aside class="callout callout-warn"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-warn"/></svg><div class="callout-body"><p class="callout-title">تنبيه</p><p><strong>تجنب</strong></p>
+<ul>
+<li>المهارات التي تعدّل إعدادات النظام بدون تأكيد</li>
+<li>الاعتماد على مسارات مطلقة (استخدم مسارات نسبية)</li>
+<li>استدعاءات شبكة غير محدودة الوقت</li>
+</ul></div></aside>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="gateway.html">دليل البوابات</a> — ربط هيرميس مع تطبيقات المراسلة</li>
+<li><a href="cron-jobs.html">المهام المجدولة</a> — أتمتة متقدمة</li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>skills-guide.md</span></footer>
+</div>
+
+<div class="page" id="page-webui">
+<header class="doc-header">
+<span class="doc-eyebrow">متقدم</span>
+<h1 class="doc-title">واجهة الويب المعرّبة (Hermes WebUI)</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> webui.md</span></div>
+</header>
+<h1 id="واجهة-هيرميس-ويب-المعرّبة">🖥 واجهة هيرميس ويب المعرّبة</h1>
+<p>بعد تثبيت Hermes Agent، ثبّت واجهة الويب للتحكم به من المتصفح بواجهة عربية كاملة.</p>
+<h2 id="التثبيت">📥 التثبيت</h2>
+<p>المستودع العربي الرسمي مع دعم RTL كامل:</p>
+<pre><code class="language-bash"># استنساخ واجهة الويب المعرّبة
+git clone https://github.com/aalhajrabih/hermes-webui.git ~/hermes-webui
+cd ~/hermes-webui
+
+# تثبيت الاعتماديات
+npm install
+
+# بناء التطبيق
+npm run build</code></pre>
+<aside class="callout callout-info"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-info"/></svg><div class="callout-body"><p class="callout-title">النسخة المعرّبة</p><p>هذه النسخة معدّلة خصيصاً للغة العربية مع:</p>
+<ul>
+<li>اتجاه RTL كامل</li>
+<li>ترجمة عربية للواجهة</li>
+<li>دعم الخطوط العربية (Noto Sans Arabic)</li>
+<li>تخطيط متجاوب مع الهواتف</li>
+</ul></div></aside>
+<h2 id="التشغيل">🚀 التشغيل</h2>
+<h3 id="تشغيل-تطويري-للاستخدام-الشخصي">تشغيل تطويري (للاستخدام الشخصي)</h3>
+<pre><code class="language-bash">cd ~/hermes-webui
+npm run dev</code></pre>
+<p>الواجهة على: <code>http://localhost:3000</code></p>
+<h3 id="تشغيل-للوصول-من-الهاتف-أو-الشبكة">تشغيل للوصول من الهاتف أو الشبكة</h3>
+<pre><code class="language-bash">cd ~/hermes-webui
+HERMES_WEBUI_HOST=0.0.0.0 npm run dev</code></pre>
+<p>ثم افتح من هاتفك: <code>http://192.168.x.x:3000</code></p>
+<h3 id="تشغيل-في-الخلفية-termux--android">تشغيل في الخلفية (Termux / Android)</h3>
+<pre><code class="language-bash">cd ~/hermes-webui
+nohup npm run dev &gt; /tmp/hermes-webui.log 2&gt;&amp;1 &amp;</code></pre>
+<p>للوصول من المتصفح على نفس الهاتف:</p>
+<pre><code class="language-bash">HERMES_WEBUI_HOST=0.0.0.0 nohup npm run dev &gt; /tmp/hermes-webui.log 2&gt;&amp;1 &amp;</code></pre>
+<h2 id="الربط-مع-hermes-agent">🔗 الربط مع Hermes Agent</h2>
+<p>واجهة الويب تحتاج أن يكون Hermes Agent شغّال:</p>
+<pre><code class="language-bash"># الطرفية 1: شغّل Hermes
+hermes serve
+
+# الطرفية 2: شغّل الواجهة
+cd ~/hermes-webui &amp;&amp; npm run dev</code></pre>
+<p>أو باستخدام <code>nohup</code> لتشغيل الاثنين في الخلفية:</p>
+<pre><code class="language-bash"># تشغيل Hermes
+nohup hermes serve &gt; /tmp/hermes.log 2&gt;&amp;1 &amp;
+
+# تشغيل الواجهة
+cd ~/hermes-webui
+HERMES_WEBUI_HOST=0.0.0.0 nohup npm run dev &gt; /tmp/hermes-webui.log 2&gt;&amp;1 &amp;</code></pre>
+<h2 id="تشغيل-على-vps">☁️ تشغيل على VPS</h2>
+<p>للتثبيت على خادم Ubuntu/Debian:</p>
+<pre><code class="language-bash"># تثبيت Node.js
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+
+# استنساخ وتثبيت
+git clone https://github.com/aalhajrabih/hermes-webui.git /opt/hermes-webui
+cd /opt/hermes-webui
+npm install
+npm run build</code></pre>
+<h3 id="كخدمة-systemd">كخدمة systemd</h3>
+<pre><code class="language-ini">[Unit]
+Description=Hermes WebUI
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/hermes-webui
+Environment=HERMES_WEBUI_HOST=0.0.0.0
+Environment=HERMES_WEBUI_PORT=3000
+ExecStart=/usr/bin/npm run start
+Restart=always
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<pre><code class="language-bash">systemctl daemon-reload
+systemctl enable --now hermes-webui</code></pre>
+<h2 id="المكونات">🎨 المكونات</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>العنصر</th><th>الوصف</th></tr></thead>
+<tbody><tr><td><strong>المحادثة</strong></td><td>واجهة محادثة مع Markdown كامل</td></tr><tr><td><strong>مدير الملفات</strong></td><td>تصفح وتحرير workspace</td></tr><tr><td><strong>المهام</strong></td><td>إدارة المهام المجدولة</td></tr><tr><td><strong>الإعدادات</strong></td><td>تغيير النموذج والمزود</td></tr><tr><td><strong>الذاكرة</strong></td><td>ذاكرة طويلة المدى</td></tr><tr><td><strong>المهارات</strong></td><td>تصفح وتثبيت المهارات</td></tr></tbody></table></div>
+<h2 id="اللغة-العربية-و-rtl">🌐 اللغة العربية و RTL</h2>
+<p>الواجهة معرّبة بالكامل:</p>
+<ul>
+<li>القوائم والأزرار بالعربية</li>
+<li>اتجاه RTL تلقائي</li>
+<li>خط Noto Sans Arabic مدمج</li>
+<li>دعم المحادثات بالعربية</li>
+</ul>
+<p>لتغيير اللغة: <code>الإعدادات → المظهر → اللغة → العربية</code></p>
+<h2 id="إعدادات-متقدمة">🔧 إعدادات متقدمة</h2>
+<h3 id="reverse-proxy-مع-nginx">Reverse Proxy مع Nginx</h3>
+<pre><code class="language-nginx">server {
+    listen 443 ssl;
+    server_name hermes.example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;upgrade&quot;;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}</code></pre>
+<h3 id="تعيين-كلمة-مرور">تعيين كلمة مرور</h3>
+<pre><code class="language-bash">hermes webui set-password</code></pre>
+<h2 id="الوصول-من-الهاتف">📱 الوصول من الهاتف</h2>
+<pre><code class="language-bash">cd ~/hermes-webui
+HERMES_WEBUI_HOST=0.0.0.0 npm run dev</code></pre>
+<p>ثم افتح <code>http://IP-الهاتف:3000</code> من المتصفح.</p>
+<h2 id="التالي">⏭ التالي</h2>
+<ul>
+<li><a href="troubleshooting.html">استكشاف الأخطاء</a></li>
+<li><a href="cron-jobs.html">المهام المجدولة</a></li>
+</ul>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>webui.md</span></footer>
+</div>
+
+<div class="page" id="page-troubleshooting">
+<header class="doc-header">
+<span class="doc-eyebrow">دعم</span>
+<h1 class="doc-title">استكشاف الأخطاء والمشاكل المعروفة</h1>
+<div class="doc-meta"><span class="doc-meta-item"><svg class="icon" viewBox="0 0 24 24"><use href="#i-file"/></svg> troubleshooting.md</span></div>
+</header>
+<h1 id="استكشاف-الأخطاء">🐛 استكشاف الأخطاء</h1>
+<p>حلول للمشاكل الشائعة التي قد تواجهها مع Hermes Agent على أندرويد.</p>
+<h2 id="مشاكل-التثبيت">🔧 مشاكل التثبيت</h2>
+<details class="collapsible"><summary>خطأ ربط ffmpeg</summary><div class="collapsible-body"></div></details>
+<pre><code>CANNOT LINK EXECUTABLE &quot;ffmpeg&quot;: cannot locate symbol &quot;x265_api_get_215&quot;</code></pre>
+<p><strong>الإصلاح:</strong></p>
+<pre><code class="language-bash">pkg upgrade
+dpkg --remove --force-depends ffmpeg
+pkg install ffmpeg</code></pre>
+<details class="collapsible"><summary>خطأ: تجميع `pydantic-core` فشل</summary><div class="collapsible-body"></div></details>
+<pre><code>error: can&#x27;t find Rust compiler</code></pre>
+<p><strong>الإصلاح:</strong> تأكد من تثبيت Rust:</p>
+<pre><code class="language-bash">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env</code></pre>
+<details class="collapsible"><summary>التثبيت يستغرق وقتاً طويلاً</summary><div class="collapsible-body"></div></details>
+<p>هذا طبيعي! التثبيت الأول يستغرق 10-30 دقيقة لأن حزماً مثل <code>pydantic-core</code> و <code>cryptography</code> تُجمّع من الشيفرات المصدرية على معالج ARM.</p>
+<p><strong>نصائح للتسريع:</strong></p>
+<ul>
+<li>أغلق التطبيقات الأخرى لتحرير RAM</li>
+<li>شغّل <code>termux-wake-lock</code> لمنع أندرويد من تعليق العملية</li>
+<li>لا تغلق الشاشة أثناء التثبيت</li>
+<li>تأكد من وجود 4GB RAM على الأقل</li>
+</ul>
+<details class="collapsible"><summary>عمليات Termux تتوقف في الخلفية</summary><div class="collapsible-body"></div></details>
+<p>أندرويد يعلّق عمليات Termux الخلفية. الحلول:</p>
+<pre><code class="language-bash"># منع التعليق
+termux-wake-lock
+
+# أو أبقِ Termux مرئياً في وضع تقسيم الشاشة</code></pre>
+<h2 id="مشاكل-النماذج">🤖 مشاكل النماذج</h2>
+<details class="collapsible"><summary>خطأ: `401 Unauthorized`</summary><div class="collapsible-body"></div></details>
+<pre><code>Error: 401 Unauthorized - Invalid API key</code></pre>
+<p><strong>الحل:</strong> تأكد من صحة مفتاح API:</p>
+<pre><code class="language-bash">hermes config show
+hermes config set providers.anthropic.api_key &quot;sk-ant-...&quot;</code></pre>
+<details class="collapsible"><summary>خطأ: `Rate limit exceeded`</summary><div class="collapsible-body"></div></details>
+<pre><code>Error: 429 Too Many Requests</code></pre>
+<p><strong>الحل:</strong></p>
+<ul>
+<li>انتظر دقيقة وأعد المحاولة</li>
+<li>استخدم مزوداً آخر كـ fallback:</li>
+</ul>
+<pre><code class="language-bash">  hermes config set models.fallback &quot;openrouter/anthropic/claude-sonnet-4&quot;</code></pre>
+<details class="collapsible"><summary>النموذج بطيء على الأندرويد</summary><div class="collapsible-body"></div></details>
+<ul>
+<li>استخدم نماذج أخف: <code>openrouter/mistral/mistral-small</code></li>
+<li>استخدم API خارجي بدل Ollama المحلي</li>
+<li>جرّب Nous Portal (مجاني وسريع)</li>
+</ul>
+<h2 id="مشاكل-البوابات">📡 مشاكل البوابات</h2>
+<details class="collapsible"><summary>تيليغرام: البوت لا يستجيب</summary><div class="collapsible-body"></div></details>
+<pre><code class="language-bash"># تحقق من حالة البوابة
+hermes gateway status
+
+# تحقق من السجلات
+hermes gateway logs
+
+# أعد تشغيل البوابة
+hermes gateway restart</code></pre>
+<details class="collapsible"><summary>تيليغرام: خطأ `409 Conflict`</summary><div class="collapsible-body"></div></details>
+<pre><code>Error: 409 Conflict - Multiple instances</code></pre>
+<p><strong>الحل:</strong> هناك نسخة أخرى من البوت تعمل. أوقفها أولاً:</p>
+<pre><code class="language-bash">pkill -f &quot;hermes gateway&quot;
+hermes gateway run</code></pre>
+<h2 id="مشاكل-الذاكرة-والتخزين">💾 مشاكل الذاكرة والتخزين</h2>
+<details class="collapsible"><summary>خطأ: `No space left on device`</summary><div class="collapsible-body"></div></details>
+<pre><code class="language-bash"># تنظيف الملفات المؤقتة
+hermes cache clear
+
+# حذف البيئات الافتراضية القديمة
+rm -rf ~/.hermes/hermes-agent/venv-old</code></pre>
+<h2 id="مشاكل-python">🐍 مشاكل Python</h2>
+<details class="collapsible"><summary>`ModuleNotFoundError: No module named 'psutil'`</summary><div class="collapsible-body"></div></details>
+<p>خاص بأندرويد Termux:</p>
+<pre><code class="language-bash">pkg install python-psutil
+VENV_SITE=$(python -c &quot;import site; print(site.getsitepackages()[0])&quot;)
+echo &quot;/data/data/com.termux/files/usr/lib/python3.13/site-packages&quot; &gt; &quot;$VENV_SITE/system-site.pth&quot;</code></pre>
+<details class="collapsible"><summary>خطأ: `GLIBC not found`</summary><div class="collapsible-body"></div></details>
+<p>بعض الحزم تحتاج glibc غير المتوفر في Termux (يستخدم musl):</p>
+<pre><code class="language-bash"># استخدم constraints-termux.txt
+pip install -c constraints-termux.txt</code></pre>
+<h2 id="أدوات-التشخيص">🔍 أدوات التشخيص</h2>
+<pre><code class="language-bash"># فحص شامل
+hermes doctor
+
+# عرض الإعدادات الحالية
+hermes config show
+
+# عرض السجلات
+hermes logs --tail 50
+
+# اختبار الاتصال بالمزود
+hermes test-connection
+
+# فحص المهارات
+hermes skills validate</code></pre>
+<h2 id="الحصول-على-المساعدة">📞 الحصول على المساعدة</h2>
+<ul>
+<li><a href="https://hermes-agent.nousresearch.com/docs/">توثيق Hermes Agent الرسمي</a></li>
+<li><a href="https://github.com/NousResearch/hermes-agent">مستودع Hermes Agent على GitHub</a></li>
+<li><a href="https://nousresearch.com">موقع Nous Research</a></li>
+<li><a href="https://termux.dev/">موقع Termux الرسمي</a></li>
+</ul>
+<aside class="callout callout-success"><svg class="callout-icon" viewBox="0 0 24 24"><use href="#i-success"/></svg><div class="callout-body"><p class="callout-title">نصيحة</p><p>قبل طلب المساعدة، شغّل <code>hermes doctor</code> وأرفق المخرجات مع تقرير المشكلة.</p></div></aside>
+<footer class="doc-footer"><span>موسوعة هيرميس</span><span>troubleshooting.md</span></footer>
+</div>
+</main>
+</div>
+
+<script>
+function showPage(slug){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.sidebar-nav a').forEach(function(a){a.classList.remove('active')});
+  var page=document.getElementById('page-'+slug);
+  if(page)page.classList.add('active');
+  var link=document.querySelector('.sidebar-nav a[data-slug="'+slug+'"]');
+  if(link)link.classList.add('active');
+  if(window.matchMedia('(max-width:900px)').matches)closeSidebar();
+  window.scrollTo(0,0);
+  location.hash=slug;
+}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('backdrop').classList.add('open')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('open')}
+var tk='hw-theme';
+function toggleTheme(){var n=(document.documentElement.dataset.theme||'light')==='light'?'dark':'light';document.documentElement.dataset.theme=n;localStorage.setItem(tk,n);document.getElementById('ti').setAttribute('href',n==='dark'?'#i-sun':'#i-moon')}
+(function(){
+var s=localStorage.getItem(tk);if(s)document.documentElement.dataset.theme=s;
+document.getElementById('ti').setAttribute('href',(document.documentElement.dataset.theme||'light')==='dark'?'#i-sun':'#i-moon');
+var slug='index';
+if(location.hash){var h=location.hash.substring(1);if(document.getElementById('page-'+h))slug=h}
+showPage(slug);
+window.addEventListener('hashchange',function(){var h=location.hash.substring(1)||'index';showPage(h)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar()});
+})();
+// Copy buttons
+function injectCopyButtons(){
+  document.querySelectorAll('.content pre').forEach(function(pre){
+    if(pre.querySelector('.copy-btn'))return;
+    var btn=document.createElement('button');btn.className='copy-btn';btn.setAttribute('aria-label','نسخ الكود');
+    btn.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-copy"/></svg>';
+    btn.onclick=function(){copyCode(this)};
+    pre.appendChild(btn);
+  });
+}
+function copyCode(btn){
+  var code=(btn.parentNode.querySelector('code')||btn.parentNode).textContent||'';
+  navigator.clipboard.writeText(code).then(function(){
+    btn.classList.add('copied');
+    btn.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-check"/></svg>';
+    setTimeout(function(){btn.classList.remove('copied');btn.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-copy"/></svg>'},1500);
+  });
+}
+injectCopyButtons();
+</script>
+</body>
+</html>
