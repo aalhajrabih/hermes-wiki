@@ -302,7 +302,7 @@ details.collapsible[open]>summary::after{transform:rotate(-90deg)}
 <header class="topbar"><div class="topbar-inner">
 <div class="brand">
 <button class="btn mobile-menu" onclick="openSidebar()" aria-label="القائمة"><svg class="icon" viewBox="0 0 24 24"><use href="#i-menu"/></svg></button>
-<span class="brand-dot"></span><span>موسوعة هيرميس</span><img src="logo.png" alt="Hermes" class="brand-logo">
+<span class="brand-dot"></span><span>موسوعة هيرميس</span>
 </div>
 <div class="topbar-actions">
 <button class="btn" onclick="toggleTheme()" aria-label="المظهر"><svg class="icon" viewBox="0 0 24 24"><use id="ti" href="#i-moon"/></svg></button>

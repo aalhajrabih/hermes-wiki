@@ -1,7 +1,5 @@
 # 📚 موسوعة هيرميس — Hermes Wiki
 
-<p align="center"><img src="logo.png" alt="Hermes Logo" height="140"></p>
-
 > دليل شامل لوكلاء Hermes Agent — تثبيت، تكوين، مهارات، وأتمتة
 >
 > Comprehensive guide for Hermes Agent — installation, configuration, skills, and automation
