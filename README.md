@@ -1,6 +1,6 @@
 # 📚 موسوعة هيرميس — Hermes Wiki
 
-<p align="center"><img src="logo.png" alt="Hermes Logo" height="80"></p>
+<p align="center"><img src="logo.png" alt="Hermes Logo" height="140"></p>
 
 > دليل شامل لوكلاء Hermes Agent — تثبيت، تكوين، مهارات، وأتمتة
 >
